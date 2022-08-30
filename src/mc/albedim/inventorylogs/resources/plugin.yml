@@ -1,9 +1,0 @@
-name: ALBEinventoryLogs
-description: "Plugin per la gestione degli inventari dei players"
-main: mc.albedim.inventorylogs.Main
-version: 1.0.0
-author: albedim
-api-version: 1.18
-commands:
-  invceck:
-    description: none
