@@ -1,0 +1,9 @@
+name: ALBEinventoryLogs
+description: "The fastest plugin to manage player's inventories"
+main: me.albedim.inventorylogs.Main
+version: 1.0.5 Internal Improvements
+author: albedim
+api-version: 1.18
+commands:
+  invceck:
+    description: none
