@@ -10,11 +10,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+
 import static me.albedim.inventorylogs.Main.database;
 
 /*
  *  Created by @albedim (Github: github.com/albedim) on 11/08/22
- *  Last Update -
+ *  Last Update 24/08/22
  */
 
 public class Commands implements CommandExecutor {
