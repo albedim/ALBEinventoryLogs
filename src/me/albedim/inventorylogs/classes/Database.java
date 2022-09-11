@@ -10,9 +10,11 @@ import static me.albedim.inventorylogs.Main.config;
  *  Last Update 01/09/22
  */
 
-public class Database {
+public class Database 
+{
 
-    public void addLog(String player, String elements, String amounts, String date, String time) {
+    public void addLog(String player, String elements, String amounts, String date, String time) 
+    {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("INSERT INTO inventories VALUES(?,?,?,?,?,?)");
             stmt.setInt(1, 0);
@@ -27,7 +29,8 @@ public class Database {
         }
     }
 
-    public ArrayList<String> getInventories(String player) {
+    public ArrayList<String> getInventories(String player) 
+    {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE author = ?");
             stmt.setString(1, player);
@@ -49,7 +52,8 @@ public class Database {
         return null;
     }
 
-    public boolean userExists(String player) {
+    public boolean userExists(String player) 
+    {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE author = ?");
             stmt.setString(1, player);
@@ -64,7 +68,8 @@ public class Database {
         return false;
     }
 
-    public boolean deleteLogs(String player) {
+    public boolean deleteLogs(String player) 
+    {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("DELETE FROM inventories WHERE author = ?");
             stmt.setString(1, player);
@@ -77,7 +82,8 @@ public class Database {
         return false;
     }
 
-    public void deleteAllLogs() {
+    public void deleteAllLogs() 
+    {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("DELETE FROM inventories");
             stmt.executeUpdate();
@@ -87,7 +93,8 @@ public class Database {
         }
     }
 
-    public int getInventoriesNumber(String player) {
+    public int getInventoriesNumber(String player) 
+    {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE author = ?");
             stmt.setString(1, player);
@@ -105,7 +112,8 @@ public class Database {
         return -1;
     }
 
-    public String[] getElements(String id) {
+    public String[] getElements(String id) 
+    {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE id = ?");
             stmt.setInt(1, Integer.parseInt(id));
@@ -120,7 +128,8 @@ public class Database {
         return null;
     }
 
-    public int getTotalInventoriesNumber() {
+    public int getTotalInventoriesNumber() 
+    {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories ORDER BY id DESC");
             ResultSet rs = stmt.executeQuery();
@@ -137,7 +146,8 @@ public class Database {
         return -1;
     }
 
-    public String getAuthor(String id) {
+    public String getAuthor(String id) 
+    {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE id = ?");
             stmt.setInt(1, Integer.parseInt(id));
@@ -152,7 +162,8 @@ public class Database {
         return null;
     }
 
-    public String[] getAmounts(String id) {
+    public String[] getAmounts(String id) 
+    {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE id = ?");
             stmt.setInt(1, Integer.parseInt(id));
