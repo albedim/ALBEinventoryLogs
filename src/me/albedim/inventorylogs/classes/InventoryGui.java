@@ -16,13 +16,16 @@ import static me.albedim.inventorylogs.Main.database;
  *  Last Update -
  */
 
-public class InventoryGui {
+public class InventoryGui 
+{
     private Player player;
-    public InventoryGui(Player player) {
+    public InventoryGui(Player player) 
+    {
         this.player = player;
     }
 
-    public ItemStack createButton(Material id, short data, int amount, List<String> lore, String display) {
+    public ItemStack createButton(Material id, short data, int amount, List<String> lore, String display) 
+    {
 
         @SuppressWarnings("deprecation")
         ItemStack item = new ItemStack(id, amount, data);
@@ -35,7 +38,8 @@ public class InventoryGui {
 
     }
 
-    public void open(Player player, String id, String date, String time, String page) {
+    public void open(Player player, String id, String date, String time, String page) 
+    {
         Inventory inv = Bukkit.createInventory(null, 45, "§8Inventario");
         String[] elements = database.getElements(id);
         String[] amounts = database.getAmounts(id);
