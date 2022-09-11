@@ -18,10 +18,12 @@ import static me.albedim.inventorylogs.Main.database;
  *  Last Update 24/08/22
  */
 
-public class Commands implements CommandExecutor {
+public class Commands implements CommandExecutor 
+{
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
+    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) 
+    {
 
         if (sender instanceof Player) {
             if (cmd.getName().equals("invceck")) {
@@ -108,7 +110,8 @@ public class Commands implements CommandExecutor {
         return false;
     }
 
-    private boolean getPageValidity(String page) {
+    private boolean getPageValidity(String page) 
+    {
         try {
             Integer.parseInt(page);
             return true;
