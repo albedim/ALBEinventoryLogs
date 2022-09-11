@@ -15,10 +15,12 @@ import static me.albedim.inventorylogs.Main.database;
  *  Last Update -
  */
 
-public class InventoryClick implements Listener {
+public class InventoryClick implements Listener 
+{
 
     @EventHandler
-    public void onInventoryClick(InventoryClickEvent e) {
+    public void onInventoryClick(InventoryClickEvent e) 
+    {
         Player player = (Player) e.getWhoClicked();
 
         if (e.getView().getTitle().equals("§8Inventario")) {
