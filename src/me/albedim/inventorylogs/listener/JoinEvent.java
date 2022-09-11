@@ -16,13 +16,16 @@ import static me.albedim.inventorylogs.Main.database;
  *  Last Update -
  */
 
-public class JoinEvent implements Listener {
+public class JoinEvent implements Listener 
+{
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent e) {
+    public void onJoin(PlayerJoinEvent e) 
+    {
         Bukkit.getScheduler().runTaskTimerAsynchronously(Main.getInstance(), new Runnable() {
             @Override
-            public void run() {
+            public void run() 
+            {
                 String elements = "", amounts = "";
 
                 for (ItemStack is : e.getPlayer().getInventory()) {
