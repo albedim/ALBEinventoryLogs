@@ -1,64 +1,20 @@
 package me.albedim.inventorylogs.classes;
 
-import me.albedim.inventorylogs.Main;
 import java.sql.*;
 import java.util.ArrayList;
 
+import static me.albedim.inventorylogs.Main.config;
+
 /*
  *  Created by @albedim (Github: github.com/albedim) on 11/08/22
- *  Last Update -
+ *  Last Update 01/09/22
  */
 
-public class Database 
-{
-    private Connection connection;
-    private String host = Main.getInstance().getConfig().getString("database.db-host");
-    private String port = Main.getInstance().getConfig().getString("database.db-port");
-    private String database = Main.getInstance().getConfig().getString("database.db-name");
-    private String username = Main.getInstance().getConfig().getString("database.db-username");
-    private String password = Main.getInstance().getConfig().getString("database.db-password");
+public class Database {
 
-    public boolean isConnected() 
-    {
-        return connection != null;
-    }
-
-    public void connect() throws ClassNotFoundException, SQLException 
-    {
-        if (!isConnected()) {
-            this.connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database + "?useSSL=false", username, password);
-            this.createInventoriesTable();
-        }
-    }
-
-    public void disconnect() 
-    {
-        if (!isConnected()) {
-            return;
-        }
+    public void addLog(String player, String elements, String amounts, String date, String time) {
         try {
-            this.connection.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public Connection getConnection() 
-    {
-        return this.connection;
-    }
-
-    private void createInventoriesTable() throws SQLException 
-    {
-        String sql = "CREATE TABLE IF NOT EXISTS `inventories` (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,`author` VARCHAR(255) NOT NULL, `date` VARCHAR(255) NOT NULL, `time` VARCHAR(255) NOT NULL,`elements` VARCHAR(1024) NOT NULL, `amounts` VARCHAR(528) NOT NULL);";
-        Statement st = this.connection.createStatement();
-        st.execute(sql);
-    }
-
-    public void addLog(String player, String elements, String amounts, String date, String time) 
-    {
-        try {
-            PreparedStatement stmt = this.connection.prepareStatement("INSERT INTO inventories VALUES(?,?,?,?,?,?)");
+            PreparedStatement stmt = config.getConnection().prepareStatement("INSERT INTO inventories VALUES(?,?,?,?,?,?)");
             stmt.setInt(1, 0);
             stmt.setString(2, player);
             stmt.setString(3, date);
@@ -71,10 +27,9 @@ public class Database
         }
     }
 
-    public ArrayList<String> getInventories(String player) 
-    {
+    public ArrayList<String> getInventories(String player) {
         try {
-            PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM inventories WHERE author = ?");
+            PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE author = ?");
             stmt.setString(1, player);
             ResultSet rs = stmt.executeQuery();
             ArrayList<String> inventories = new ArrayList<String>();
@@ -94,10 +49,9 @@ public class Database
         return null;
     }
 
-    public boolean userExists(String player) 
-    {
+    public boolean userExists(String player) {
         try {
-            PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM inventories WHERE author = ?");
+            PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE author = ?");
             stmt.setString(1, player);
             ResultSet rs = stmt.executeQuery();
 
@@ -110,10 +64,9 @@ public class Database
         return false;
     }
 
-    public boolean deleteLogs(String player) 
-    {
+    public boolean deleteLogs(String player) {
         try {
-            PreparedStatement stmt = this.connection.prepareStatement("DELETE FROM inventories WHERE author = ?");
+            PreparedStatement stmt = config.getConnection().prepareStatement("DELETE FROM inventories WHERE author = ?");
             stmt.setString(1, player);
             stmt.executeUpdate();
 
@@ -124,10 +77,9 @@ public class Database
         return false;
     }
 
-    public void deleteAllLogs() 
-    {
+    public void deleteAllLogs() {
         try {
-            PreparedStatement stmt = this.connection.prepareStatement("DELETE FROM inventories");
+            PreparedStatement stmt = config.getConnection().prepareStatement("DELETE FROM inventories");
             stmt.executeUpdate();
 
         } catch (SQLException e) {
@@ -135,10 +87,9 @@ public class Database
         }
     }
 
-    public int getInventoriesNumber(String player) 
-    {
+    public int getInventoriesNumber(String player) {
         try {
-            PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM inventories WHERE author = ?");
+            PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE author = ?");
             stmt.setString(1, player);
             ResultSet rs = stmt.executeQuery();
             int counter = 0;
@@ -154,10 +105,9 @@ public class Database
         return -1;
     }
 
-    public String[] getElements(String id) 
-    {
+    public String[] getElements(String id) {
         try {
-            PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM inventories WHERE id = ?");
+            PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE id = ?");
             stmt.setInt(1, Integer.parseInt(id));
             ResultSet rs = stmt.executeQuery();
 
@@ -172,7 +122,7 @@ public class Database
 
     public int getTotalInventoriesNumber() {
         try {
-            PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM inventories ORDER BY id DESC");
+            PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories ORDER BY id DESC");
             ResultSet rs = stmt.executeQuery();
             int counter = 0;
 
@@ -187,10 +137,9 @@ public class Database
         return -1;
     }
 
-    public String getAuthor(String id) 
-    {
+    public String getAuthor(String id) {
         try {
-            PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM inventories WHERE id = ?");
+            PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE id = ?");
             stmt.setInt(1, Integer.parseInt(id));
             ResultSet rs = stmt.executeQuery();
 
@@ -203,10 +152,9 @@ public class Database
         return null;
     }
 
-    public String[] getAmounts(String id)
-    {
+    public String[] getAmounts(String id) {
         try {
-            PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM inventories WHERE id = ?");
+            PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE id = ?");
             stmt.setInt(1, Integer.parseInt(id));
             ResultSet rs = stmt.executeQuery();
 
