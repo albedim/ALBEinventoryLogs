@@ -9,7 +9,8 @@ import java.util.ArrayList;
  *  Last Update -
  */
 
-public class Database {
+public class Database 
+{
     private Connection connection;
     private String host = Main.getInstance().getConfig().getString("database.db-host");
     private String port = Main.getInstance().getConfig().getString("database.db-port");
@@ -17,18 +18,21 @@ public class Database {
     private String username = Main.getInstance().getConfig().getString("database.db-username");
     private String password = Main.getInstance().getConfig().getString("database.db-password");
 
-    public boolean isConnected() {
+    public boolean isConnected() 
+    {
         return connection != null;
     }
 
-    public void connect() throws ClassNotFoundException, SQLException {
+    public void connect() throws ClassNotFoundException, SQLException 
+    {
         if (!isConnected()) {
             this.connection = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + database + "?useSSL=false", username, password);
             this.createInventoriesTable();
         }
     }
 
-    public void disconnect() {
+    public void disconnect() 
+    {
         if (!isConnected()) {
             return;
         }
@@ -39,17 +43,20 @@ public class Database {
         }
     }
 
-    public Connection getConnection() {
+    public Connection getConnection() 
+    {
         return this.connection;
     }
 
-    private void createInventoriesTable() throws SQLException {
+    private void createInventoriesTable() throws SQLException 
+    {
         String sql = "CREATE TABLE IF NOT EXISTS `inventories` (id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,`author` VARCHAR(255) NOT NULL, `date` VARCHAR(255) NOT NULL, `time` VARCHAR(255) NOT NULL,`elements` VARCHAR(1024) NOT NULL, `amounts` VARCHAR(528) NOT NULL);";
         Statement st = this.connection.createStatement();
         st.execute(sql);
     }
 
-    public void addLog(String player, String elements, String amounts, String date, String time) {
+    public void addLog(String player, String elements, String amounts, String date, String time) 
+    {
         try {
             PreparedStatement stmt = this.connection.prepareStatement("INSERT INTO inventories VALUES(?,?,?,?,?,?)");
             stmt.setInt(1, 0);
@@ -64,7 +71,8 @@ public class Database {
         }
     }
 
-    public ArrayList<String> getInventories(String player) {
+    public ArrayList<String> getInventories(String player) 
+    {
         try {
             PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM inventories WHERE author = ?");
             stmt.setString(1, player);
@@ -86,7 +94,8 @@ public class Database {
         return null;
     }
 
-    public boolean userExists(String player) {
+    public boolean userExists(String player) 
+    {
         try {
             PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM inventories WHERE author = ?");
             stmt.setString(1, player);
@@ -101,7 +110,8 @@ public class Database {
         return false;
     }
 
-    public boolean deleteLogs(String player) {
+    public boolean deleteLogs(String player) 
+    {
         try {
             PreparedStatement stmt = this.connection.prepareStatement("DELETE FROM inventories WHERE author = ?");
             stmt.setString(1, player);
@@ -114,7 +124,8 @@ public class Database {
         return false;
     }
 
-    public void deleteAllLogs() {
+    public void deleteAllLogs() 
+    {
         try {
             PreparedStatement stmt = this.connection.prepareStatement("DELETE FROM inventories");
             stmt.executeUpdate();
@@ -124,7 +135,8 @@ public class Database {
         }
     }
 
-    public int getInventoriesNumber(String player) {
+    public int getInventoriesNumber(String player) 
+    {
         try {
             PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM inventories WHERE author = ?");
             stmt.setString(1, player);
@@ -142,7 +154,8 @@ public class Database {
         return -1;
     }
 
-    public String[] getElements(String id) {
+    public String[] getElements(String id) 
+    {
         try {
             PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM inventories WHERE id = ?");
             stmt.setInt(1, Integer.parseInt(id));
@@ -174,7 +187,8 @@ public class Database {
         return -1;
     }
 
-    public String getAuthor(String id) {
+    public String getAuthor(String id) 
+    {
         try {
             PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM inventories WHERE id = ?");
             stmt.setInt(1, Integer.parseInt(id));
@@ -189,7 +203,8 @@ public class Database {
         return null;
     }
 
-    public String[] getAmounts(String id) {
+    public String[] getAmounts(String id)
+    {
         try {
             PreparedStatement stmt = this.connection.prepareStatement("SELECT * FROM inventories WHERE id = ?");
             stmt.setInt(1, Integer.parseInt(id));
