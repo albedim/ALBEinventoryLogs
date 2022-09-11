@@ -13,11 +13,13 @@ import java.sql.SQLException;
  *  Last Update -
  */
 
-public class Main extends JavaPlugin {
+public class Main extends JavaPlugin 
+{
     public static Main plugin;
     public static Database database;
 
-    public void onEnable() {
+    public void onEnable() 
+    {
         plugin = this;
         getCommand("invceck").setExecutor(new Commands());
         Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);
@@ -32,11 +34,13 @@ public class Main extends JavaPlugin {
         }
     }
 
-    public void onDisable() {
+    public void onDisable() 
+    {
         database.disconnect();
     }
 
-    public static Main getInstance() {
+    public static Main getInstance() 
+    {
         return plugin;
     }
 
