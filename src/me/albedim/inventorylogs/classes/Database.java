@@ -5,15 +5,18 @@ import java.util.ArrayList;
 
 import static me.albedim.inventorylogs.Main.config;
 
-/*
- *  Created by @albedim (Github: github.com/albedim) on 11/08/22
- *  Last Update 01/09/22
+/**
+ * @author: albedim <dimaio.albe@gmail.com>
+ * Created on: 01/09/22
+ * Created at: 11:14
+ * Version: 1.0.0
+ * Description: This is the class for the database
  */
 
-public class Database 
+public class Database
 {
 
-    public void addLog(String player, String elements, String amounts, String date, String time) 
+    public void addLog(String player, String elements, String amounts, String date, String time)
     {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("INSERT INTO inventories VALUES(?,?,?,?,?,?)");
@@ -29,7 +32,7 @@ public class Database
         }
     }
 
-    public ArrayList<String> getInventories(String player) 
+    public ArrayList<String> getInventories(String player)
     {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE author = ?");
@@ -52,129 +55,107 @@ public class Database
         return null;
     }
 
-    public boolean userExists(String player) 
+    public boolean userExists(String player)
     {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE author = ?");
             stmt.setString(1, player);
             ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) return true;
-
+            return rs.next();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return false;
     }
 
-    public boolean deleteLogs(String player) 
+    public boolean deleteLogs(String player)
     {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("DELETE FROM inventories WHERE author = ?");
             stmt.setString(1, player);
             stmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return false;
     }
 
-    public void deleteAllLogs() 
+    public void deleteAllLogs()
     {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("DELETE FROM inventories");
             stmt.executeUpdate();
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public int getInventoriesNumber(String player) 
+    public int getInventoriesNumber(String player)
     {
         try {
-            PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE author = ?");
+            PreparedStatement stmt = config.getConnection().prepareStatement("SELECT count(*) AS total FROM inventories WHERE author = ?");
             stmt.setString(1, player);
             ResultSet rs = stmt.executeQuery();
-            int counter = 0;
-
-            while (rs.next()) counter++;
-
-            return counter;
-
+            if(rs.next())
+                return rs.getInt("title");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return -1;
     }
 
-    public String[] getElements(String id) 
+    public String[] getElements(String id)
     {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE id = ?");
             stmt.setInt(1, Integer.parseInt(id));
             ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) return rs.getString("elements").split(",");
-
+            if (rs.next())
+                return rs.getString("elements").split(",");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
-    public int getTotalInventoriesNumber() 
+    public int getTotalInventoriesNumber()
     {
         try {
-            PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories ORDER BY id DESC");
+            PreparedStatement stmt = config.getConnection().prepareStatement("SELECT count(*) AS total FROM inventories ORDER BY id DESC");
             ResultSet rs = stmt.executeQuery();
-            int counter = 0;
-
-            while (rs.next()) counter++;
-
-            return counter;
-
+            if (rs.next())
+                return rs.getInt("total");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return -1;
     }
 
-    public String getAuthor(String id) 
+    public String getAuthor(String id)
     {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE id = ?");
             stmt.setInt(1, Integer.parseInt(id));
             ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) return rs.getString("author");
-
+            if (rs.next())
+                return rs.getString("author");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 
-    public String[] getAmounts(String id) 
+    public String[] getAmounts(String id)
     {
         try {
             PreparedStatement stmt = config.getConnection().prepareStatement("SELECT * FROM inventories WHERE id = ?");
             stmt.setInt(1, Integer.parseInt(id));
             ResultSet rs = stmt.executeQuery();
-
-            if (rs.next()) return rs.getString("amounts").split(",");
-
+            if (rs.next())
+                return rs.getString("amounts").split(",");
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
         return null;
     }
 

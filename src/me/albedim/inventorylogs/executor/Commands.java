@@ -10,19 +10,18 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import static me.albedim.inventorylogs.Main.database;
 
 /*
  *  Created by @albedim (Github: github.com/albedim) on 11/08/22
- *  Last Update 24/08/22
+ *  Last Update -
  */
 
-public class Commands implements CommandExecutor 
+public class Commands implements CommandExecutor
 {
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) 
+    public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args)
     {
 
         if (sender instanceof Player) {
@@ -110,8 +109,7 @@ public class Commands implements CommandExecutor
         return false;
     }
 
-    private boolean getPageValidity(String page) 
-    {
+    private boolean getPageValidity(String page) {
         try {
             Integer.parseInt(page);
             return true;

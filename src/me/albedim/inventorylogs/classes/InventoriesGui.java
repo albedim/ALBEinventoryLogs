@@ -11,34 +11,31 @@ import java.util.List;
 
 import static me.albedim.inventorylogs.Main.database;
 
-/*
- *  Created by @albedim (Github: github.com/albedim) on 12/08/22
- *  Last Update -
+/**
+ * @author: albedim <dimaio.albe@gmail.com>
+ * Created on: 12/8/22
+ * Created at: 15:48
+ * Version: 1.0.0
+ * Description: This is the class for the guis
  */
 
-public class InventoriesGui 
+public class InventoriesGui
 {
     private Player player;
-    public InventoriesGui(Player player) 
-    {
-        this.player = player;
-    }
+    public InventoriesGui(Player player) { this.player = player; }
 
-    public ItemStack createButton(Material id, short data, int amount, List<String> lore, String display) 
+    public ItemStack createButton(Material id, short data, int amount, List<String> lore, String display)
     {
-
         @SuppressWarnings("deprecation")
         ItemStack item = new ItemStack(id, amount, data);
         ItemMeta meta = item.getItemMeta();
         meta.setDisplayName(display);
         meta.setLore(lore);
         item.setItemMeta(meta);
-
         return item;
-
     }
 
-    public void open(Player player, Player staffer, int page) 
+    public void open(Player player, Player staffer, int page)
     {
 
         Inventory inv = Bukkit.createInventory(null, 45, "§8Inventario");
@@ -55,23 +52,16 @@ public class InventoriesGui
         staffer.openInventory(inv);
     }
 
-    private int getIndexofPage(int page) 
-    {
-        return 36 * (page - 1);
-    }
+    private int getIndexofPage(int page) { return 36 * (page - 1); }
 
-    private int getIndexofLore(int page) 
-    {
-        return 3 * this.getIndexofPage(page);
-    }
+    private int getIndexofLore(int page) { return 3 * this.getIndexofPage(page); }
 
-    private ArrayList<String> getLore(ArrayList<String> inventories, int y) 
+    private ArrayList<String> getLore(ArrayList<String> inventories, int y)
     {
         ArrayList<String> lore = new ArrayList<String>();
         lore.add(" §7ID §a» §7" + inventories.get(y));
         lore.add(" §7Data §a» §7" + inventories.get(y + 1));
         lore.add(" §7Ora §a» §7" + inventories.get(y + 2));
-
         return lore;
     }
 

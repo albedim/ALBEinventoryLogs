@@ -1,5 +1,6 @@
 package me.albedim.inventorylogs;
 
+import me.albedim.inventorylogs.classes.Config;
 import me.albedim.inventorylogs.classes.Database;
 import me.albedim.inventorylogs.executor.Commands;
 import me.albedim.inventorylogs.listener.InventoryClick;
@@ -10,38 +11,34 @@ import java.sql.SQLException;
 
 /*
  *  Created by @albedim (Github: github.com/albedim) on 11/08/22
- *  Last Update -
+ *  Last Update 01/09/22
  */
 
-public class Main extends JavaPlugin 
+public class Main extends JavaPlugin
 {
     public static Main plugin;
+    public static Config config;
     public static Database database;
 
-    public void onEnable() 
+    public void onEnable()
     {
         plugin = this;
+        this.config = new Config();
         getCommand("invceck").setExecutor(new Commands());
         Bukkit.getPluginManager().registerEvents(new JoinEvent(), this);
         Bukkit.getPluginManager().registerEvents(new InventoryClick(), this);
-        this.database = new Database();
         saveDefaultConfig();
         try {
-            database.connect();
+            config.connect();
+            this.database = new Database();
             System.out.println("[ALBEInventoryLogs] Plugin succefully activated and connected to the database '" + getConfig().getString("database.db-name") + "'.");
         } catch (ClassNotFoundException | SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void onDisable() 
-    {
-        database.disconnect();
-    }
+    public void onDisable() { config.disconnect(); }
 
-    public static Main getInstance() 
-    {
-        return plugin;
-    }
+    public static Main getInstance() { return plugin; }
 
 }

@@ -1,7 +1,11 @@
 name: ALBEinventoryLogs
 description: "The fastest plugin to manage player's inventories"
 main: me.albedim.inventorylogs.Main
-version: 1.0.5 Internal Improvements
+version: 1.0.1 Performance optimizations
+versions:
+  - " 1.0.1 - Performance optimizations"
+  - " 1.0.5 - Internal Improvements"
+  - " 1.0.0 - Beta Version"
 author: albedim
 api-version: 1.18
 commands:
