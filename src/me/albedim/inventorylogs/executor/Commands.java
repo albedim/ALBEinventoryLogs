@@ -12,9 +12,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import static me.albedim.inventorylogs.Main.database;
 
-/*
- *  Created by @albedim (Github: github.com/albedim) on 11/08/22
- *  Last Update -
+/**
+ * @author: albedim <dimaio.albe@gmail.com>
+ * Created on: 11/08/22
+ * Created at: 12:48
+ * Version: 1.0.0
+ * Description: This is the class for the commands
  */
 
 public class Commands implements CommandExecutor

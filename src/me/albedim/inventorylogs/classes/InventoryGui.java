@@ -11,9 +11,12 @@ import java.util.List;
 
 import static me.albedim.inventorylogs.Main.database;
 
-/*
- *  Created by @albedim (Github: github.com/albedim) on 12/08/22
- *  Last Update -
+/**
+ * @author: albedim <dimaio.albe@gmail.com>
+ * Created on: 12/10/22
+ * Created at: 11:14
+ * Version: 1.0.0
+ * Description: This is the class for the gui
  */
 
 public class InventoryGui

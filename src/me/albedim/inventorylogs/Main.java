@@ -9,9 +9,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 import java.sql.SQLException;
 
-/*
- *  Created by @albedim (Github: github.com/albedim) on 11/08/22
- *  Last Update 01/09/22
+/**
+ * @author: albedim <dimaio.albe@gmail.com>
+ * Created on: 11/08/22
+ * Created at: 08:54
+ * Version: 1.0.0
+ * Description: This is the class for the main
  */
 
 public class Main extends JavaPlugin

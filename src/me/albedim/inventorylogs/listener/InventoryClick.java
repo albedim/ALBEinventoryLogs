@@ -10,9 +10,12 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 
 import static me.albedim.inventorylogs.Main.database;
 
-/*
- *  Created by @albedim (Github: github.com/albedim) on 13/08/22
- *  Last Update -
+/**
+ * @author: albedim <dimaio.albe@gmail.com>
+ * Created on: 13/08/22
+ * Created at: 18:38
+ * Version: 1.0.0
+ * Description: This is the class for the inventoryClick event
  */
 
 public class InventoryClick implements Listener
